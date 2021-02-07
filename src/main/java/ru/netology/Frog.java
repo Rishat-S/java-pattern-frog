@@ -11,7 +11,25 @@ public class Frog {
     }
 
     public boolean jump(int steps) {
-        // TODO
-        return false;
+        // сделаем прыжок, если прыжок слишком большой
+        // для поля, то не прыгнем и вернём false
+        if ((position + steps) > MAX_POSITION || (position + steps) < MIN_POSITION) {
+            System.out.println("Прыжок не возможен.");
+            return false;
+        } else {
+            position = position + steps;
+            return true;
+        }
+    }
+
+    public void draw() {
+        for (int i = 0; i <= MAX_POSITION; i++) {
+            if (i == position) {
+                System.out.print("F");
+            } else {
+                System.out.print("0");
+            }
+        }
+        System.out.println();
     }
 }
