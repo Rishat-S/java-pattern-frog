@@ -1,21 +1,21 @@
 package ru.netology;
 
 public class FrogCommands {
-    public static FrogCommand jumpRightCommand(Frog frog, int steps) {
+    public static FrogCommand jumpCommand(Frog frog, int steps) {
         // возвращаете объект команды, у которого
         // если вызвать .redo(), то лягушка её выполнит,
         // если вызвать .undo(), то лягушка её отменит
         return new FrogCommand() {
             @Override
-            public boolean redo() {
+            public void redo() {
 
-                return frog.jump(steps);
+                frog.jump(steps);
             }
 
             @Override
-            public boolean undo() {
+            public void undo() {
 
-                return frog.jump(-steps);
+                frog.jump(-steps);
             }
         };
     }

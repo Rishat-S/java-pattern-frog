@@ -46,7 +46,13 @@ public class Main {
                 break;
             }
 
-            // TODO:
+            if (input.equals("!!") && curCommand == -1) {
+                System.out.println("Нечего повторять!");
+                continue;
+            }
+            if (input.equals("!!")) {
+                input = lastInput;
+            }
 
             if (input.equals("<<")) {
                 if (curCommand < 0) {
@@ -65,23 +71,21 @@ public class Main {
             } else { //пользователь ввёл новое движение для лягушки
                 if (curCommand != commands.size() - 1) {
                     //удаляем все команды которые были отменены
-                    commands.subList(curCommand + 1, commands.size()).clear(); // FIXME: chek?
+                    commands.subList(curCommand + 1, commands.size()).clear();
                 }
-                if (input.equals("!!") && lastInput == null) {
-                    System.out.println("Нечего повторять!");
-                    continue;
-                }
-                if (input.equals("!!")) {
+
+                try {
+                    FrogCommand cmd = FrogCommands.jumpCommand(frog, Integer.parseInt(input));
+                    curCommand++;
+                    commands.add(cmd);
+                    cmd.redo();
+                } catch (NumberFormatException e) {
+                    System.out.println("Команда не распознана!");
                     input = lastInput;
+                    System.out.println(e.getMessage());
                 }
-
-                FrogCommand cmd = FrogCommands.jumpRightCommand(frog, Integer.parseInt(input)); // FIXME: chek?
-                curCommand++;
-                commands.add(cmd); // FIXME: cast?
-                lastInput = input;
-                cmd.redo();
             }
-
+            lastInput = input;
         }
     }
 }

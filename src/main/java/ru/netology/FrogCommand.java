@@ -1,7 +1,7 @@
 package ru.netology;
 
 public interface FrogCommand {
-    boolean redo();
+    void redo();
 
-    boolean undo();
+    void undo();
 }
